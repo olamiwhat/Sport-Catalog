@@ -1,0 +1,50 @@
+{% extends "base.html" %} <!-- This page will inherit from my base html-->
+
+{% block title %}
+Catalog -- Categories
+{% endblock %}
+
+{% block categories %}
+{% endblock %}
+
+{% block editACategory %}
+{% endblock %}
+
+{% block deleteACategory %}
+{% endblock %}
+
+{% block content %}
+
+	<main>
+		<article>
+			<header>
+				<h1>Welcome</h1>
+				<p>This is an application that provides a list of items within a variety of categories as well as provide a user registration and authentication system. Registered users will have the ability to post, edit and delete their own items.</p>
+			</header>
+			<section>
+				<h2>Categories</h2>
+			</section>
+			<section>
+				{% with messages = get_flashed_messages() %}
+					{% if messages %}
+					<ul>
+						{% for message in messages %}
+							<li><strong>{{ message }}</strong></li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				{% endwith %}
+			</section>
+			<section class="categories">
+				{% for category in categories %}
+				<ul class="nobull">
+					<a href="{{url_for('showCategoryItem', category_id=category.id)}}">
+						<li><h3>{{category.name}}</h3></li>
+					</a>
+				</ul>
+				{% endfor %}
+			</section>
+		</article>
+	</main>
+
+{% endblock %}

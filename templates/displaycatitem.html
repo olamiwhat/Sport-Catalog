@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+Catalog -- Category Items
+{% endblock %}
+
+{% block addACategory %}
+{% endblock %}
+
+{% block editACategory %}
+{% endblock %}
+
+{% block deleteACategory %}
+{% endblock %}
+
+{% block content %}
+
+	<section>
+		<h2>{{item.name}}</h2>
+		<article>
+			<p>Description: {{item.description}}</p>
+			<p>
+				<span><a href="{{url_for('editCategoryItem', category_id=category_id, item_id=item_id)}}">Edit Item</a></span>
+				<span class="verticalLine">&#124;</span>
+				<span><a href="{{url_for('deleteCategoryItem', category_id=category_id, item_id=item_id)}}">Delete Item</a></span>
+		</article>
+
+	</section>
+
+
+{% block sidebar %}
+{% endblock %}
+
+{% endblock %}

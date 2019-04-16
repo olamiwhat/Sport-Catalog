@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}
+Catalog -- Category
+{% endblock %}
+
+{% block addACategory %}
+{% endblock %}
+
+{% block editACategory %}
+{% endblock %}
+
+{% block deleteACategory %}
+{% endblock %}
+
+{% block content %}
+
+<main>
+	<article>
+		<section>
+			<h2>{{category.name}} items</h2>
+			<p>
+				<span><a href="{{url_for('editCategory', category_id=category_id)}}">Edit Category</a></span>
+				<span class="verticalLine">&#124;</span>
+				<span><a href="{{url_for('deleteCategory', category_id=category_id)}}">Delete Category</a></span>
+				<span class="verticalLine">&#124;</span>
+				<span><a href="{{url_for('newCategoryItem', category_id=category_id)}}">Add a New Item</a></span>
+			</p>
+		</section>
+		<section>
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					<ul>
+						{% for message in messages %}
+							<li><strong>{{ message }}</strong></li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			{% endwith %}
+		</section>
+		<section class="category-item">
+			{% for item in items %}
+				<a href="{{url_for('displayCategoryItem', category_id=category.id, item_id=item.id)}}">
+					<h3>{{item.name}}</h3>
+				</a>
+			{% endfor %}
+		</section>
+	</article>
+</main>
+
+{% block sidebar %}
+{% endblock %}
+
+{% endblock %}

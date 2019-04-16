@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+Catalog -- Edit Item
+{% endblock %}
+
+{% block addACategory %}
+{% endblock %}
+
+{% block editACategory %}
+{% endblock %}
+
+{% block deleteACategory %}
+{% endblock %}
+
+{% block content %}
+	
+	<article>
+		<h2>Edit Item</h2>
+		<section>
+			<form action="{{url_for('editCategoryItem', category_id=category_id, item_id=item_id)}}" method='post'>
+				<div>
+					<label>Name:</label>
+					<input type="text" size="30" name="name" value="{{item.name}}">
+				</div>
+				<br>
+				<div>
+					<label>Description:</label><br>
+					<textarea rows="5" cols="50" name="description">{{item.description}}</textarea>
+				</div>
+				<span><input type="submit" value="Submit">
+			</form>
+			<a href="{{url_for('displayCategoryItem', category_id=category_id, item_id=item_id)}}">Cancel</a></span>
+		</section>
+	</article>
+
+{% block sidebar %}
+{% endblock %}
+
+{% endblock %}

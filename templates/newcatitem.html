@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+Catalog -- Add New Item
+{% endblock %}
+
+{% block addACategory %}
+{% endblock %}
+
+{% block editACategory %}
+{% endblock %}
+
+{% block deleteACategory %}
+{% endblock %}
+
+{% block content %}
+	
+	<section>
+		<h2>Enter details for new item</h2>
+		<p>(<em>All fields are required!</em>)</p>
+		<form action="{{url_for('newCategoryItem', category_id=category_id)}}" method='post'>
+			<div>
+				<label>Name:</label>
+				<input type="text" size="30" name="name" placeholder="Enter New Item" required>
+			</div>
+			<br>
+			<div>
+				<label>Description:</label><br>
+				<textarea name="description" rows="5" cols="50" placeholder="Enter item description" required></textarea>
+			</div>
+
+			<span><input type="submit" value="Submit">
+		</form>
+			<a href="{{url_for('showCategoryItem', category_id=category_id)}}">Cancel</a></span>
+	</section>
+
+{% block sidebar %}
+{% endblock %}
+
+{% endblock %}
