@@ -21,5 +21,15 @@ class CategoryItem(Base):
 	category = relationship(Category)
 
 
+	@property
+	def serialize(self):
+		#returns object data in easily serializeable format
+		return {
+			'name': self.name,
+			'description': self.description,
+			'id': self.id,
+			}
+
+
 engine = create_engine('sqlite:///catalogitem.db')
 Base.metadata.create_all(engine)

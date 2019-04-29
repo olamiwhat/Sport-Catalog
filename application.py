@@ -15,6 +15,13 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
+#JSON APIs to view Categories Items Information
+@app.route('/category/<int:category_id>/items/JSON')
+def categoryItemJSON(category_id):
+	category = session.query(Category).filter_by(id=category_id).one()
+	items = session.query(CategoryItem).filter_by(category_id=category_id).all()
+	return jsonify(CategoryItem=[i.serialize for i in items])
+
 #Homepage - shows all categories in catalog
 @app.route('/')
 @app.route('/categories/')
