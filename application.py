@@ -67,6 +67,7 @@ def editCategory(category_id):
 	if request.method == 'POST':
 		if request.form['name']:
 			category.name = request.form['name']
+			flash("Category successfully edited")
 			return redirect(url_for('showCategories'))
 	else:
 		return render_template('editcategory.html', category=category, category_id=category_id)
@@ -79,6 +80,7 @@ def deleteCategory(category_id):
 	if request.method == 'POST':
 		session.delete(catToDelete)
 		session.commit()
+		flash("Category %s deleted!" % catToDelete.name)
 		return redirect(url_for('showCategories'))
 	return render_template('deletecategory.html', category=category, category_id=category.id)
 
@@ -114,6 +116,7 @@ def editCategoryItem(category_id, item_id):
 			itemToEdit.description = request.form['description']
 		session.add(itemToEdit)
 		session.commit()
+		flash("Category item successfully edited")
 		return redirect(url_for('showCategoryItem', category_id=category_id))
 	return render_template('editcatitem.html', category_id=category_id, item=itemToEdit, item_id=item_id)
 
@@ -125,6 +128,7 @@ def deleteCategoryItem(category_id, item_id):
 	if request.method == 'POST':
 		session.delete(itemToDelete)
 		session.commit()
+		flash("Category item successfully deleted")
 		return redirect(url_for('showCategoryItem', category_id=category_id))
 	return render_template('deletecatitem.html', category_id=category_id, item_id=itemToDelete.id, item=itemToDelete)
 
