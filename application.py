@@ -15,12 +15,30 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-#JSON APIs to view Categories Items Information
+
+#JSON API to view all categories
+@app.route('/JSON')
+@app.route('/categories/JSON')
+def CategoriesJSON():
+	categories = session.query(Category).all()
+	return jsonify(categories=[i.serialize for i in categories])
+
+#JSON API to view Categories Items Information
+@app.route('/category/<int:category_id>/JSON')
 @app.route('/category/<int:category_id>/items/JSON')
 def categoryItemJSON(category_id):
 	category = session.query(Category).filter_by(id=category_id).one()
 	items = session.query(CategoryItem).filter_by(category_id=category_id).all()
 	return jsonify(CategoryItem=[i.serialize for i in items])
+
+#JSON API to view specific item Information
+@app.route('/category/<int:category_id>/item/<int:item_id>/JSON')
+def itemInfoJSON(category_id, item_id):
+	category = session.query(Category).filter_by(id=category_id).one()
+	itemToShow = session.query(CategoryItem).filter_by(id=item_id).one()
+	return jsonify(itemInfo=itemToShow.serialize)
+	return render_template('displaycatitem.html', category_id=category_id, item=itemToShow, item_id=item_id)
+
 
 #Homepage - shows all categories in catalog
 @app.route('/')

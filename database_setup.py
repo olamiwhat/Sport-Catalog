@@ -12,6 +12,15 @@ class Category(Base):
 	id = Column(Integer, primary_key=True)
 	name = Column(String(80), nullable=False)
 
+
+	@property
+	def serialize(self):
+		#returns object data in easily serializeable format
+		return {
+			'name': self.name,
+			'id': self.id,
+			}
+
 class CategoryItem(Base):
 	__tablename__ = 'category_item'
 	name = Column(String(250), nullable=False)
