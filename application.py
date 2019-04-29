@@ -18,21 +18,21 @@ session = DBSession()
 
 #JSON API to view all categories
 @app.route('/JSON')
-@app.route('/categories/JSON')
+@app.route('/catalog/JSON')
 def CategoriesJSON():
 	categories = session.query(Category).all()
 	return jsonify(categories=[i.serialize for i in categories])
 
 #JSON API to view Categories Items Information
-@app.route('/category/<int:category_id>/JSON')
-@app.route('/category/<int:category_id>/items/JSON')
+@app.route('/catalog/<int:category_id>/JSON')
+@app.route('/catalog/<int:category_id>/items/JSON')
 def categoryItemJSON(category_id):
 	category = session.query(Category).filter_by(id=category_id).one()
 	items = session.query(CategoryItem).filter_by(category_id=category_id).all()
 	return jsonify(CategoryItem=[i.serialize for i in items])
 
 #JSON API to view specific item Information
-@app.route('/category/<int:category_id>/item/<int:item_id>/JSON')
+@app.route('/catalog/<int:category_id>/item/<int:item_id>/JSON')
 def itemInfoJSON(category_id, item_id):
 	category = session.query(Category).filter_by(id=category_id).one()
 	itemToShow = session.query(CategoryItem).filter_by(id=item_id).one()
@@ -42,25 +42,25 @@ def itemInfoJSON(category_id, item_id):
 
 #Homepage - shows all categories in catalog
 @app.route('/')
-@app.route('/categories/')
+@app.route('/catalog/')
 def showCategories():
 	categories = session.query(Category).order_by(asc(Category.name))
-	return render_template('categories.html', categories=categories) #renders a template from the template folder with the given context
+	return render_template('catalog.html', categories=categories) #renders a template from the template folder with the given context
 
 #Create a new category
-@app.route('/category/new/', methods=['GET','POST'])
+@app.route('/catalog/new_category/', methods=['GET','POST'])
 def newCategory():
 	if request.method =='POST':
 		newCat = Category(name=request.form['name'])
 		session.add(newCat)
 		session.commit()
-		flash("New Category %s Added!" % newCat.name)
+		flash("New Category '%s' Added!" % newCat.name)
 		return redirect(url_for('showCategories'))
 	else:
 		return render_template('newcategory.html')
 
 #Edit a category
-@app.route('/category/<int:category_id>/edit/', methods=['GET','POST'])
+@app.route('/catalog/<int:category_id>/edit/', methods=['GET','POST'])
 def editCategory(category_id):
 	catToEdit = session.query(Category).filter_by(id=category_id).one()
 	category = catToEdit
@@ -73,39 +73,39 @@ def editCategory(category_id):
 		return render_template('editcategory.html', category=category, category_id=category_id)
 
 #Delete a category
-@app.route('/category/<int:category_id>/delete/', methods=['GET','POST'])
+@app.route('/catalog/<int:category_id>/delete/', methods=['GET','POST'])
 def deleteCategory(category_id):
 	catToDelete = session.query(Category).filter_by(id=category_id).one()
 	category = catToDelete
 	if request.method == 'POST':
 		session.delete(catToDelete)
 		session.commit()
-		flash("Category %s deleted!" % catToDelete.name)
+		flash("Category '%s' deleted!" % catToDelete.name)
 		return redirect(url_for('showCategories'))
 	return render_template('deletecategory.html', category=category, category_id=category.id)
 
 #Show a category with the category items
-@app.route('/category/<int:category_id>/')
-@app.route('/category/<int:category_id>/items/')
+@app.route('/catalog/<int:category_id>/')
+@app.route('/catalog/<int:category_id>/items/')
 def showCategoryItem(category_id):
 	category = session.query(Category).filter_by(id=category_id).one()
 	items = session.query(CategoryItem).filter_by(category_id=category_id).all()
 	return render_template('showcatitem.html', items=items, category=category, category_id=category.id)
 
 #Add new item to a category
-@app.route('/category/<int:category_id>/item/new', methods=['GET','POST'])
+@app.route('/catalog/<int:category_id>/item/new', methods=['GET','POST'])
 def newCategoryItem(category_id):
 	category = session.query(Category).filter_by(id=category_id).one()
 	if request.method == 'POST':
 		itemToAdd = CategoryItem(name=request.form['name'], description=request.form['description'], category_id=category_id)
 		session.add(itemToAdd)
 		session.commit()
-		flash("New Item %s Added!" % itemToAdd.name)
+		flash("New Item '%s' Added!" % itemToAdd.name)
 		return redirect(url_for('showCategoryItem', category_id=category_id))
 	return render_template('newcatitem.html', category=category, category_id=category.id)
 
 #edit an item
-@app.route('/category/<int:category_id>/item/<int:item_id>/edit', methods=['GET','POST'])
+@app.route('/catalog/<int:category_id>/item/<int:item_id>/edit', methods=['GET','POST'])
 def editCategoryItem(category_id, item_id):
 	itemToEdit = session.query(CategoryItem).filter_by(id=item_id).one()
 	category = session.query(Category).filter_by(id=category_id).one()	
@@ -121,19 +121,19 @@ def editCategoryItem(category_id, item_id):
 	return render_template('editcatitem.html', category_id=category_id, item=itemToEdit, item_id=item_id)
 
 #edelete an item
-@app.route('/category/<int:category_id>/item/<int:item_id>/delete', methods=['GET','POST'])
+@app.route('/catalog/<int:category_id>/item/<int:item_id>/delete', methods=['GET','POST'])
 def deleteCategoryItem(category_id, item_id):
 	category = session.query(Category).filter_by(id=category_id).one()
 	itemToDelete = session.query(CategoryItem).filter_by(id=item_id).one()
 	if request.method == 'POST':
 		session.delete(itemToDelete)
 		session.commit()
-		flash("Category item successfully deleted")
+		flash("'%s' successfully deleted" % itemToDelete.name)
 		return redirect(url_for('showCategoryItem', category_id=category_id))
 	return render_template('deletecatitem.html', category_id=category_id, item_id=itemToDelete.id, item=itemToDelete)
 
 #Dsiplaying Item Description
-@app.route('/category/<int:category_id>/item/<int:item_id>')
+@app.route('/catalog/<int:category_id>/item/<int:item_id>')
 def displayCategoryItem(category_id, item_id):
 	category = session.query(Category).filter_by(id=category_id).one()
 	itemToShow = session.query(CategoryItem).filter_by(id=item_id).one()
