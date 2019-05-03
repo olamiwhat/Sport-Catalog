@@ -38,7 +38,7 @@ Catalog -- Categories
 			<section class="categories">
 				{% for category in categories %}
 				<ul class="nobull">
-					<a href="{{url_for('showCategoryItem', category_id=category.id)}}">
+					<a href="{{url_for('showCategoryItem', category_name=category.name)}}">
 						<li><h3>{{category.name}}</h3></li>
 					</a>
 				</ul>

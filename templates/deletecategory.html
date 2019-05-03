@@ -18,10 +18,10 @@ Catalog -- Delete Category
 	<section>
 		<h2>Are you sure you want to delete {{category.name}}?</h2>
 		
-			<form action="{{url_for('deleteCategory', category_id=category_id)}}" method = 'post'>
+			<form action="{{url_for('deleteCategory', category_name=category_name)}}" method = 'post'>
 				<span><input type="submit" value="Delete">
 			</form>
-			<a href="{{url_for('showCategoryItem', category_id=category_id)}}">Cancel</a></span>
+			<a href="{{url_for('showCategoryItem', category_name=category_name)}}">Cancel</a></span>
 	</section>
 
 

@@ -19,8 +19,8 @@
 	                <nav>
 	                    <ul> <!-- This blocks help me hide the addCategory and Edit Category links on different pages -->
 	                        <li>{% block addACategory %}<a href="{{url_for('newCategory')}}">Add Category</a>{% endblock %}</li>
-	                        <li>{% block editACategory %}<a href="{{url_for('editCategory', category_id=category_id)}}">Edit Category</a>{% endblock %}</li>
-	                        <li>{% block deleteACategory %}<a href="{{url_for('deleteCategory', category_id=category_id)}}">Delete Category</a>{% endblock %}</li>
+	                        <li>{% block editACategory %}<a href="{{url_for('editCategory', category_name=category_name)}}">Edit Category</a>{% endblock %}</li>
+	                        <li>{% block deleteACategory %}<a href="{{url_for('deleteCategory', category_name=category_name)}}">Delete Category</a>{% endblock %}</li>
 	                        <li>{% block categories %}<a href="{{url_for('showCategories')}}">Categories</a>{% endblock %}</li>
 	                        <li><a href="#">Login</a></li>
 	                    </ul>
