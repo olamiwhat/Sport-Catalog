@@ -7,7 +7,7 @@ Catalog -- Category
 {% block addACategory %}
 {% endblock %}
 
-{% block login %}
+{% block logout %}
 {% endblock %}
 
 {% block content %}
@@ -21,13 +21,6 @@ Catalog -- Category
 					<figcaption>{{ creator.name }}</figcaption>
 				</figure>
 			</h2>
-			<p>
-				<span><a href="{{url_for('editCategory', category_name=category_name)}}">Edit Category</a></span>
-				<span class="verticalLine">&#124;</span>
-				<span><a href="{{url_for('deleteCategory', category_name=category_name)}}">Delete Category</a></span>
-				<span class="verticalLine">&#124;</span>
-				<span><a href="{{url_for('newCategoryItem', category_name=category_name)}}">Add a New Item</a></span>
-			</p>
 		</section>
 		<section>
 			{% with messages = get_flashed_messages() %}
