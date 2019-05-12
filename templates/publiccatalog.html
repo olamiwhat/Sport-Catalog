@@ -51,7 +51,7 @@ Catalog -- Categories
 			{% if recentItems %}
 				{% for items in recentItems %}
 				<ul class="item-list">
-					<li>{{ items.name }} ({{items.category.name}})</li>
+					<li>{{ items.name }}<span class="item-list-category">({{items.category.name}})
 				</ul>
 				{% endfor %}
 			{% else %}
