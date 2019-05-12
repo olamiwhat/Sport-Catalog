@@ -27,7 +27,7 @@ class Category(Base):
 
     @property
     def serialize(self):
-        # returns object data in easily serializeable format
+        ''' returns object data in easily serializeable format '''
         return {
             'name': self.name,
             'id': self.id,
@@ -41,13 +41,14 @@ class CategoryItem(Base):
     id = Column(Integer, primary_key=True)
     description = Column(String(250))
     category_id = Column(Integer, ForeignKey('category.id'))
-    category = relationship(Category)
+    category = relationship(Category, backref=backref(
+                            "category_item", cascade="all, delete"))
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
 
     @property
     def serialize(self):
-        # returns object data in easily serializeable format
+        ''' returns object data in easily serializeable format'''
         return {
             'name': self.name,
             'description': self.description,
