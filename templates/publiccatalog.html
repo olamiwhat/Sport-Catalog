@@ -19,7 +19,7 @@ Catalog -- Categories
 		<article>
 			<header>
 				<h1>Welcome</h1>
-				<p>This is an application that provides a list of items within a variety of categories as well as provide a user registration and authentication system. Though registered users can post and view other users items, they will have the ability to edit and delete only their own items.</p>
+				<p>This is an application that provides a list of items within a variety of categories as well as provide a user registration and authentication system. Though registered users can post and view other users items, they have the ability to edit and delete only their own items.</p>
 			</header>
 			<section>
 				<h2>Categories</h2>
@@ -37,14 +37,27 @@ Catalog -- Categories
 			</section>
 			<section class="categories">
 				{% for category in categories %}
-				<ul class="nobull">
+				<ul class="category">
 					<a href="{{url_for('showCategoryItem', category_name=category.name)}}">
 						<li><h3>{{category.name}}</h3></li>
-					</a>
+					</a><span>Created by {{ category.user.name }}</span>
 				</ul>
 				{% endfor %}
 			</section>
 		</article>
+
+		<aside>
+			<h3>Recently added items</h3>
+			{% if recentItems %}
+				{% for items in recentItems %}
+				<ul class="item-list">
+					<li>{{ items.name }} ({{items.category.name}})</li>
+				</ul>
+				{% endfor %}
+			{% else %}
+				No items yet!
+			{% endif %}
+		</aside>
 	</main>
 
 {% endblock %}

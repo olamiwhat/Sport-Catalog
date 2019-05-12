@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="">
+<html class="no-js" lang="en-us">
 	<head>{% block head %}
 		<meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -27,20 +27,22 @@
 	            </header>
 	        </div>
 
-	    <div class="main-container">
-	    	<div class="main wrapper clearfix">
-		
-				{% block content %}
-				{% endblock %}
-
-				{% block sidebar %}
-					<aside>
-						<h3>Recently added items</h3>
-						<p>This will populate will recently added items</p>
-					</aside>
-				{% endblock %}
+	    <section id="showcase">
+			<div class="wrapper">
 			</div>
-		</div>
+		</section>
+
+
+	    <main>
+		    <div class="main-container">
+		    	<div class="main wrapper clearfix">
+					
+					{% block content %}
+					{% endblock %}
+
+				</div>
+			</div>
+		</main>
 		{% block footer %}
 		<div class="footer-container">
             <footer class="wrapper">
