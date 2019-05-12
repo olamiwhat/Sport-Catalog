@@ -35,9 +35,11 @@ Catalog -- Category
 		</section>
 		<section class="category-item">
 			{% for item in items %}
-				<a href="{{url_for('displayCategoryItem', category_name=category_name, item_name=item.name)}}">
-					<h3>{{item.name}}</h3>
-				</a>
+				<ul class="category-item">
+					<li><a href="{{url_for('displayCategoryItem', category_name=category_name, item_name=item.name)}}">
+						<h3>{{item.name}}</h3>
+					</a></li>
+				</ul>
 			{% endfor %}
 		</section>
 	</article>
