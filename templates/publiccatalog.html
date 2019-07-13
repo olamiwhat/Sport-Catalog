@@ -17,13 +17,6 @@ Catalog -- Categories
 
 	<main>
 		<article>
-			<header>
-				<h1>Welcome</h1>
-				<p>This is an application that provides a list of items within a variety of categories as well as provide a user registration and authentication system. Though registered users can post and view other users items, they have the ability to edit and delete only their own items.</p>
-			</header>
-			<section>
-				<h2>Categories</h2>
-			</section>
 			<section>
 				{% with messages = get_flashed_messages() %}
 					{% if messages %}
@@ -35,6 +28,14 @@ Catalog -- Categories
 					{% endif %}
 				{% endwith %}
 			</section>
+			<header>
+				<h1>Welcome</h1>
+				<p>This is an application that provides a list of items within a variety of categories as well as provide a user registration and authentication system. Though registered users can post and view other users items, they have the ability to edit and delete only their own items.</p>
+			</header>
+			<section>
+				<h2>Categories</h2>
+			</section>
+			
 			<section class="categories">
 				{% for category in categories %}
 				<ul class="category">
