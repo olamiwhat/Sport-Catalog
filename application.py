@@ -29,6 +29,7 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
+
 # create a state token to prevent request forgery.
 # store it in the session for later validation.
 @app.route('/login')
@@ -155,6 +156,7 @@ def getUserID(email):
     except getUserIDError:
         return None
 
+
 # DISCONNECT - Revoke a current user's token and reset their login_session
 @app.route('/gdisconnect')
 def gdisconnect():
@@ -177,6 +179,7 @@ def gdisconnect():
             'Failed to revoke token for given user.', 400))
         response.headers['Content-Type'] = 'application/json'
         return response
+
 
 # logout based on provider
 @app.route('/logout')
@@ -247,6 +250,7 @@ def showCategories():
     return render_template('catalog.html', categories=categories,
                            recentItems=recentItems(6))
 
+
 # Show a category with the category items
 @app.route('/catalog/<category_name>/')
 @app.route('/catalog/<category_name>/items/')
@@ -264,6 +268,7 @@ def showCategoryItem(category_name):
                                category=category, category_name=category_name,
                                creator=creator)
 
+
 # Create a new category
 @app.route('/catalog/new-category/', methods=['GET', 'POST'])
 def newCategory():
@@ -278,6 +283,7 @@ def newCategory():
         return redirect(url_for('showCategories'))
     else:
         return render_template('newcategory.html')
+
 
 # Edit a category
 @app.route('/catalog/<category_name>/edit/', methods=['GET', 'POST'])
@@ -300,6 +306,7 @@ window.location.href = '/catalog';}</script><body onload='myFunction()'>"
     else:
         return render_template('editcategory.html', category=category,
                                category_name=category_name)
+
 
 # Delete a category
 @app.route('/catalog/<category_name>/delete/', methods=['GET', 'POST'])
@@ -391,6 +398,7 @@ window.location.href = '/catalog';}</script><body onload='myFunction()'>"
                         category_name=category_name))
     return render_template('editcatitem.html', category_name=category_name,
                            item_name=itemToEdit.name, item=itemToEdit)
+
 
 # Delete an item
 @app.route('/catalog/<category_name>/<item_name>/delete/',
