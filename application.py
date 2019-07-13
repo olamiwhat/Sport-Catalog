@@ -14,6 +14,7 @@ import httplib2
 import json
 from flask import make_response
 import requests
+import logging
 
 app = Flask(__name__)
 
@@ -30,10 +31,11 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
-# create a state token to prevent request forgery.
-# store it in the session for later validation.
 @app.route('/login')
 def showLogin():
+    """Creates a State Token to prevent request forgery
+    and store it in a session for later validation.
+    """
     state = ''.join(random.choice(string.ascii_uppercase + string.digits)
                     for x in range(32))
     login_session['state'] = state
@@ -42,7 +44,8 @@ def showLogin():
 
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
-    # Validate state token
+    """Validate state token.
+    """
     if request.args.get('state') != login_session['state']:
         response = make_response(json.dumps('Invalid state parameter.'), 401)
         response.headers['Content-Type'] = 'application/json'
@@ -86,7 +89,7 @@ def gconnect():
     if result['issued_to'] != CLIENT_ID:
         response = make_response(
             json.dumps("Token's client ID does not match app's."), 401)
-        print "Token's client ID does not match app's."
+        logging.warning("Token's client ID does not match app's.")
         response.headers['Content-Type'] = 'application/json'
         return response
     # Check to see if user is already logged in
@@ -112,7 +115,7 @@ def gconnect():
     login_session['username'] = data['name']
     login_session['picture'] = data['picture']
     login_session['email'] = data['email']
-    # ADD PROVIDER TO LOGIN SESSION
+    # Add provider to login session
     login_session['provider'] = 'google'
 
     # see if user exists, if it doesn't make a new one
