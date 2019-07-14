@@ -139,8 +139,7 @@ nav a:hover {
     color: black;
     padding: 0 30px;
     padding-left: 30px;
-    border-left: 20px solid #081841;
-}
+ }
 
 .footer-container footer {
     color: white;
@@ -180,7 +179,9 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .main aside h3 {
-    color: white;
+    color: #fff;
+    padding: 0 40px;
+    padding-bottom: 5px;
 }
 
 .categories h3 {
@@ -280,12 +281,9 @@ h1, h2, h3, h4, h5, h6 {
     border-style: ;
 }
 
-aside h3 {
-    border-style: solid;
-    border-radius: 10px;
-    padding: 0 30px;
-    padding-bottom: 5px;
-    background-color: #081841
+
+.aside-head {
+    background: #081841;
 }
 
 
