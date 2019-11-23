@@ -1,5 +1,5 @@
 # Item Catalog
-This project is a part of Udacity's Full Stack Web Developer Nanodegree. This is an application that provides a list of items within a variety of categories (in this case-Sport) as well as provide a user registration and authentication system. Registered users have the ability to post, edit and delete their own items. This application is a RESTful web application built using the Flask Python Framework. It utilizes Google OAuth authentication for users registration and authentication.
+This project is a full CRUD application that also implements google OAuth. This is an application that provides a list of items within a variety of categories (in this case-Sport) as well as provide a user registration and authentication system. Registered users have the ability to post, edit and delete their own items. This application is a RESTful web application built using the Flask Python Framework. It utilizes Google OAuth authentication for users registration and authentication.
 
 ## Technologies Implemented
  - RESTful
