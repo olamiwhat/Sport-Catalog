@@ -41,7 +41,7 @@ Either way, you will end up with a new directory containing the VM files. From y
 - Once `vagrant up` is done with installation, run `vagrant ssh` to log into the Linux VM. 
 - You can also run `vagrant status` to check the status of vagrant. 
 
-### Download the applocation
+### Download the application
 - You can download the application by clicking on the clone or download button in the repo
 - You can as well fork the repo
 
